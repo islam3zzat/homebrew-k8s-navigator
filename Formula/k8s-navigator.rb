@@ -10,10 +10,21 @@ class K8sNavigator < Formula
   def install
     # Extract the .app bundle
     system "unzip", cached_download, "-d", "extracted"
-    # Install the .app bundle to a custom location (user's home directory)
+
+    # Ensure the custom installation directory exists
     app_dir = File.expand_path("~/k8s-navigator-app")
-    mkdir_p app_dir
-    cp_r "extracted/k8s-navigator.app", app_dir
+    system "mkdir", "-p", app_dir
+
+    # Debug output to verify the directory creation
+    ohai "Custom installation directory:", app_dir
+
+    # Copy the .app bundle to the custom location
+    system "cp", "-r", "extracted/k8s-navigator.app", app_dir
+
+    # Debug output to verify the copy operation
+    ohai "Contents of custom installation directory:"
+    system "ls", "-la", app_dir
+
     # Create a symlink to the main executable
     bin.install_symlink "#{app_dir}/k8s-navigator.app/Contents/MacOS/k8s-navigator" => "k8s-navigator"
   end

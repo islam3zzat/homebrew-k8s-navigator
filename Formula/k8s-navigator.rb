@@ -10,28 +10,29 @@ class K8sNavigator < Formula
   def install
     # Extract the .app bundle
     system "unzip", cached_download, "-d", "extracted"
-    # Install the entire .app bundle in the prefix directory
-    prefix.install "extracted/k8s-navigator.app"
-    # Create a symlink to the main executable
-    bin.install_symlink prefix/"k8s-navigator.app/Contents/MacOS/k8s-navigator" => "k8s-navigator"
+    # Create Applications directory if it doesn't exist
+    app_path = "/Applications/k8s-navigator.app"
+    system "sudo", "mkdir", "-p", "/Applications"
+    system "sudo", "cp", "-r", "extracted/k8s-navigator.app", "/Applications"
+
+    # Debug output to verify the installation
+    ohai "Application installed at:", app_path
+
+    # Create a symlink to the main executable in /usr/local/bin
+    bin.install_symlink "/Applications/k8s-navigator.app/Contents/MacOS/k8s-navigator" => "k8s-navigator"
   end
 
   def post_install
     # Sign the .app bundle
-    system "codesign", "--deep", "--force", "--verify", "--sign", "-", "#{prefix}/k8s-navigator.app"
+    system "sudo", "codesign", "--deep", "--force", "--verify", "--sign", "-", "/Applications/k8s-navigator.app"
   end
 
   def caveats
     <<~EOS
-      The k8s-navigator app bundle has been installed and signed in:
-        #{opt_prefix}/k8s-navigator.app
-
-        TO add the app to your Applications folder, run:
-        ln -s #{opt_prefix}/k8s-navigator.app /Applications/k8s-navigator.app
-
-        To add the executable to your PATH, run:
-
-        echo 'export PATH="#{opt_prefix}/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.zshrc
+      The k8s-navigator app bundle has been installed in:
+        /Applications/k8s-navigator.app
+      The command-line tool has been linked as:
+        /usr/local/bin/k8s-navigator
     EOS
   end
 

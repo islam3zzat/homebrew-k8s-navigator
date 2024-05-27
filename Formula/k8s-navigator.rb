@@ -13,7 +13,7 @@ class K8sNavigator < Formula
     # Install the entire .app bundle in the prefix directory
     prefix.install "extracted/k8s-navigator.app"
     # Install the entitlements file
-    (share/"k8s-navigator").install resource("entitlements")
+    (share/"k8s-navigator").install "share/k8s-navigator/entitlements.plist"
     # Create a symlink to the main executable
     bin.install_symlink prefix/"k8s-navigator.app/Contents/MacOS/k8s-navigator" => "k8s-navigator"
   end

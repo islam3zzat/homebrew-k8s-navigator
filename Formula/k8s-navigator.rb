@@ -2,7 +2,7 @@ class K8sNavigator < Formula
   desc "K8s Navigator is a tool for navigating Kubernetes clusters"
   homepage "https://github.com/yourusername/k8s-navigator"
   url "https://storage.googleapis.com/k8s-navigator-bucket/k8s-navigator-darwin-arm64-2.0.0.zip"
-  sha256 "d4a5370646df0b5e6171c1ea4daf53aa7503e931d12c6b86cb87db36dcde2cd0"
+  sha256 "9db75cb86f41ede0c07f48ecdbb4b5515dc654f8b3af997c3ee48b3e60487c70"
   license "MIT"
 
   depends_on "node"
@@ -31,6 +31,13 @@ class K8sNavigator < Formula
 
       To add the executable to your PATH, you can add the following line to your shell configuration:
         echo 'export PATH="#{opt_prefix}/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.zshrc
+
+        After that, you can run the app by typing:
+        k8s-navigator
+
+        or, to run it in the background:
+
+        k8s-navigator &
     EOS
   end
 

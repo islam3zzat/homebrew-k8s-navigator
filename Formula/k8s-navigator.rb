@@ -19,9 +19,6 @@ class K8sNavigator < Formula
   def post_install
     # Sign the .app bundle
     system "codesign", "--deep", "--force", "--verify", "--sign", "-", "#{prefix}/k8s-navigator.app"
-
-    # Create a symlink in the /Applications folder
-    system "ln", "-s", "#{opt_prefix}/k8s-navigator.app", "/Applications/k8s-navigator.app"
   end
 
   def caveats
@@ -29,11 +26,10 @@ class K8sNavigator < Formula
       The k8s-navigator app bundle has been installed and signed in:
         #{opt_prefix}/k8s-navigator.app
 
-        TO add the app to your Applications folder, run:
-        ln -s #{opt_prefix}/k8s-navigator.app /Applications/k8s-navigator.app
+      To add the app to your Applications folder, you need to create a symlink manually:
+        sudo ln -s #{opt_prefix}/k8s-navigator.app /Applications/k8s-navigator.app
 
-        To add the executable to your PATH, run:
-
+      To add the executable to your PATH, you can add the following line to your shell configuration:
         echo 'export PATH="#{opt_prefix}/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.zshrc
     EOS
   end

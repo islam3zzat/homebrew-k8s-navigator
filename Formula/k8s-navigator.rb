@@ -10,8 +10,10 @@ class K8sNavigator < Formula
   def install
     # Extract the .app bundle
     system "unzip", cached_download, "-d", "extracted"
-    # Use prefix to install within the Homebrew managed path
-    app_dir = prefix/"k8s-navigator-app"
+
+    # Define the custom installation directory using the HOME environment variable
+    home_dir = ENV["HOME"]
+    app_dir = "#{home_dir}/k8s-navigator-app"
     mkdir_p app_dir
 
     # Debug output to verify the directory creation
@@ -25,13 +27,13 @@ class K8sNavigator < Formula
     system "ls", "-la", app_dir
 
     # Create a symlink to the main executable
-    bin.install_symlink app_dir/"k8s-navigator.app/Contents/MacOS/k8s-navigator" => "k8s-navigator"
+    bin.install_symlink "#{app_dir}/k8s-navigator.app/Contents/MacOS/k8s-navigator" => "k8s-navigator"
   end
 
   def caveats
     <<~EOS
-      The k8s-navigator app bundle has been installed at:
-        #{HOMEBREW_PREFIX}/Cellar/k8s-navigator/2.0.0/k8s-navigator-app/k8s-navigator.app
+      The k8s-navigator app bundle has been installed in your home directory at:
+        ~/k8s-navigator-app/k8s-navigator.app
     EOS
   end
 

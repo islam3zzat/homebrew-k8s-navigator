@@ -16,10 +16,6 @@ class K8sNavigator < Formula
     bin.install_symlink prefix/"k8s-navigator.app/Contents/MacOS/k8s-navigator" => "k8s-navigator"
   end
 
-  def post_install
-    # Sign the .app bundle
-    system "codesign", "--deep", "--force", "--verify", "--sign", "-", "#{prefix}/k8s-navigator.app"
-  end
 
   def caveats
     <<~EOS

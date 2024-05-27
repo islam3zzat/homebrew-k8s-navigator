@@ -1,8 +1,8 @@
 class K8sNavigator < Formula
   desc "K8s Navigator is a tool for navigating Kubernetes clusters"
   homepage "https://github.com/yourusername/k8s-navigator"
-  url "https://storage.googleapis.com/k8s-navigator-bucket/k8s-navigator-darwin-arm64-2.0.0.zip"
-  sha256 "9db75cb86f41ede0c07f48ecdbb4b5515dc654f8b3af997c3ee48b3e60487c70"
+  url "https://storage.googleapis.com/k8s-navigator-bucket/k8s-navigator-darwin-arm64-3.0.0.zip"
+  sha256 "3fe6f24330b82945b9c3780e16d46fe38e7144034e157b7033a9ccd1ef77740d"
   license "MIT"
 
   depends_on "node"

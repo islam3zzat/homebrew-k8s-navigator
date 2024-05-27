@@ -8,9 +8,11 @@ class K8sNavigator < Formula
   depends_on "node"
 
   def install
-    # Extract the main executable from the .app bundle
     system "unzip", cached_download, "-d", "extracted"
-    bin.install "extracted/k8s-navigator.app/Contents/MacOS/k8s-navigator"
+    # Install the entire .app bundle
+    prefix.install "extracted/k8s-navigator.app"
+    # Symlink the main executable
+    bin.install_symlink prefix/"k8s-navigator.app/Contents/MacOS/k8s-navigator" => "k8s-navigator"
   end
 
   test do

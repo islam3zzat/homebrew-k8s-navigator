@@ -8,11 +8,29 @@ class K8sNavigator < Formula
   depends_on "node"
 
   def install
+    # Extract the .app bundle
     system "unzip", cached_download, "-d", "extracted"
     # Install the entire .app bundle
     prefix.install "extracted/k8s-navigator.app"
+    # Create a bin directory inside the app bundle's Contents
+    mkdir_p "#{prefix}/k8s-navigator.app/Contents/MacOS/bin"
     # Symlink the main executable
     bin.install_symlink prefix/"k8s-navigator.app/Contents/MacOS/k8s-navigator" => "k8s-navigator"
+  end
+
+  def post_install
+    # Ensure all dylibs are correctly referenced
+    app = prefix/"k8s-navigator.app"
+    frameworks = app/"Contents/Frameworks"
+
+    Dir["#{frameworks}/**/*.dylib", "#{frameworks}/**/*.so"].each do |f|
+      system "install_name_tool", "-id", f, f
+      MachO.open(f).linked_dylibs.each do |dylib|
+        if dylib.start_with?("@rpath")
+          system "install_name_tool", "-change", dylib, "#{frameworks}/#{File.basename(dylib)}", f
+        end
+      end
+    end
   end
 
   test do

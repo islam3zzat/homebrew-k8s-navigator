@@ -7,6 +7,8 @@ class K8sNavigator < Formula
 
   depends_on "node"
 
+  skip_clean "k8s-navigator.app"
+
   def install
     # Extract the .app bundle
     system "unzip", cached_download, "-d", "extracted"

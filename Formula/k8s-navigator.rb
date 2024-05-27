@@ -8,14 +8,14 @@ class K8sNavigator < Formula
   depends_on "node"
 
   def install
-    # Create the installation directory
-    app_dir = "/usr/local/k8s-navigator-app"
+    # Define the custom installation directory within the opt prefix
+    app_dir = "#{HOMEBREW_PREFIX}/opt/k8s-navigator-app"
     mkdir_p app_dir
 
     # Debug output to verify the directory creation
     ohai "Custom installation directory:", app_dir
 
-    # Extract the .app bundle directly to the custom location
+    # Extract the .app bundle to the custom location
     system "unzip", cached_download, "-d", app_dir
 
     # Debug output to verify the copy operation
@@ -29,7 +29,7 @@ class K8sNavigator < Formula
   def caveats
     <<~EOS
       The k8s-navigator app bundle has been installed at:
-        /usr/local/k8s-navigator-app/k8s-navigator.app
+        #{HOMEBREW_PREFIX}/opt/k8s-navigator-app/k8s-navigator.app
     EOS
   end
 

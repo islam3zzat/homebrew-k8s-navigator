@@ -31,7 +31,7 @@ class K8sNavigator < Formula
 
         To add the executable to your PATH, run:
 
-        echo 'export PATH="#{opt_prefix}/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.zshrc'
+        echo 'export PATH="#{opt_prefix}/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.zshrc
     EOS
   end
 

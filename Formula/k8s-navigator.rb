@@ -7,12 +7,6 @@ class K8sNavigator < Formula
 
   depends_on "node"
 
-
-  resource "entitlements" do
-    url "file://#{HOMEBREW_PREFIX}/share/k8s-navigator/entitlements.plist"
-    sha256 "a0ae1f29552919515b9ade6952edd8d8829b83c0c515551cb6d0176e11f382db"
-  end
-
   def install
     # Extract the .app bundle
     system "unzip", cached_download, "-d", "extracted"

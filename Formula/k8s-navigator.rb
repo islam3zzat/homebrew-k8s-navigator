@@ -7,14 +7,21 @@ class K8sNavigator < Formula
 
   depends_on "node"
 
+
+  resource "entitlements" do
+    url "https://storage.googleapis.com/k8s-navigator-bucket/entitlements.plist"
+    sha256 "a0ae1f29552919515b9ade6952edd8d8829b83c0c515551cb6d0176e11f382db"
+  end
+
   def install
     # Extract the .app bundle
     system "unzip", cached_download, "-d", "extracted"
     # Install the entire .app bundle in the prefix directory
     prefix.install "extracted/k8s-navigator.app"
     # Install the entitlements file
-    (share/"k8s-navigator").install "share/k8s-navigator/entitlements.plist"
-    # Create a symlink to the main executable
+    resource("entitlements").stage do
+      (share/"k8s-navigator").install "entitlements.plist"
+    end    # Create a symlink to the main executable
     bin.install_symlink prefix/"k8s-navigator.app/Contents/MacOS/k8s-navigator" => "k8s-navigator"
   end
 

@@ -25,6 +25,13 @@ class K8sNavigator < Formula
     <<~EOS
       The k8s-navigator app bundle has been installed and signed in:
         #{opt_prefix}/k8s-navigator.app
+
+        TO add the app to your Applications folder, run:
+        ln -s #{opt_prefix}/k8s-navigator.app /Applications/k8s-navigator.app
+
+        To add the executable to your PATH, run:
+
+        echo 'export PATH="#{opt_prefix}/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.zshrc'
     EOS
   end
 

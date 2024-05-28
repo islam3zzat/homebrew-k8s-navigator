@@ -2,29 +2,19 @@ class K8sNavigator < Formula
   desc "K8s Navigator is a tool for navigating Kubernetes clusters"
   homepage "https://github.com/islam3zzat/k8s-navigator"
   url "https://storage.googleapis.com/k8s-navigator-bucket/k8s-navigator-darwin-arm64-0.0.2.zip"
-  sha256 "e221366ea6c9aa4a15129acda3ed08c92960a388dca45c9c95a31ec2097763bf"
+  sha256 "5dae9b0fc459e11c9e933d75886ce96a7f0984fe57377a18040c85c33102dab1"
   license "MIT"
 
   depends_on "node"
-
-
-  resource "entitlements" do
-    url "https://storage.googleapis.com/k8s-navigator-bucket/entitlements.plist"
-    sha256 "a0ae1f29552919515b9ade6952edd8d8829b83c0c515551cb6d0176e11f382db"
-  end
 
   def install
     # Extract the .app bundle
     system "unzip", cached_download, "-d", "extracted"
     # Install the entire .app bundle in the prefix directory
     prefix.install "extracted/k8s-navigator.app"
-    # Install the entitlements file
-    resource("entitlements").stage do
-      (share/"k8s-navigator").install "entitlements.plist"
-    end    # Create a symlink to the main executable
+    # Create a symlink to the main executable
     bin.install_symlink prefix/"k8s-navigator.app/Contents/MacOS/k8s-navigator" => "k8s-navigator"
   end
-
 
   def caveats
     <<~EOS

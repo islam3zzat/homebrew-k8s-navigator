@@ -8,7 +8,7 @@ class K8sNavigator < Formula
   depends_on "node"
 
   def install
-    system "installer", "-pkg", cached_download, "-target", "/"
+    system "installer", "-pkg", cached_download, "-target", "~"
   end
 
   def caveats

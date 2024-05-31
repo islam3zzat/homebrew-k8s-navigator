@@ -15,14 +15,19 @@ class K8sNavigator < Formula
 
   def caveats
     <<~EOS
-    k8s-navigator has been installed in your Applications folder.
+    k8s-navigator.app has been installed to:
+    #{opt_prefix}/k8s-navigator.app
 
-    To launch k8s-navigator, you can either:
-    - Open Finder, navigate to /Applications, and double-click k8s-navigator.app
-    - Or use the command: open /Applications/k8s-navigator.app
+  To launch k8s-navigator, you can use the following command:
+    open #{opt_prefix}/k8s-navigator.app
 
-    To add k8s-navigator to your PATH, use the command:
-      echo 'export PATH="/Applications/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.zshrc
+  If you want to move k8s-navigator to your Applications folder, use the following command:
+    sudo cp -r #{opt_prefix}/k8s-navigator.app /Applications
+
+  Note: Moving the app to the Applications folder requires administrator privileges.
+
+  To add k8s-navigator to your PATH, you can use the command:
+    echo 'export PATH="/Applications/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.zshrc
 EOS
   end
 

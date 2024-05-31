@@ -1,16 +1,14 @@
 class K8sNavigator < Formula
   desc "K8s Navigator is a tool for navigating Kubernetes clusters"
   homepage "https://github.com/islam3zzat/k8s-navigator"
-  url "https://storage.googleapis.com/k8s-navigator-bucket/k8s-navigator-darwin-universal-0.1.99.zip"
-  sha256 "6913d00c25831b78e7eb1ea4fbe33635feca6c697134582dccf155585d0f29b4"
+  url "https://storage.googleapis.com/k8s-navigator-bucket/k8s-navigator-0.0.399-universal.pkg"
+  sha256 "07fce6dbb3e28dd7bd9bcc4d650541931ff90db75b40056c29394ade96fc6a59"
   license "MIT"
 
   depends_on "node"
 
   def install
-    system "unzip", cached_download, "-d", "extracted"
-    # Copy the .app bundle to the Applications directory using rsync
-    prefix.install "extracted/k8s-navigator.app"
+    system "installer", "-pkg", cached_download, "-target", "/"
   end
 
   def caveats

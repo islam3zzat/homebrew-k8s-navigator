@@ -9,10 +9,8 @@ class K8sNavigator < Formula
 
   def install
     system "unzip", cached_download, "-d", "extracted"
-    # Install the entire .app bundle in the prefix directory
-    prefix.install "extracted/k8s-navigator.app"
     # Copy the .app bundle to the Applications directory using rsync
-    system "rsync", "-a", "#{prefix}/k8s-navigator.app", "/Applications"
+    prefix.install "extracted/k8s-navigator.app"
   end
 
   def caveats

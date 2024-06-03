@@ -1,6 +1,6 @@
 cask "k8s-navigator" do
-  version "0.0.43"
-  sha256 "97ea85aac44c700b73caf9a20d148c9519e295d6afaf992fd262a6af4a2795cd"
+  version "0.0.44"
+  sha256 ""
 
   url "https://github.com/islam3zzat/k8s-navigator/releases/download/#{version}/k8s-navigator-#{version}-universal.dmg"
   name "K8s Navigator"

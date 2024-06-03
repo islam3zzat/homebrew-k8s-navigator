@@ -1,37 +1,33 @@
-class K8sNavigator < Formula
-  desc "K8s Navigator is a tool for navigating Kubernetes clusters"
+cask "k8s-navigator" do
+  version "0.0.41"
+  sha256 "9f3e60b92994f92a81ea44df8792c70fcceba4513f5521da22acfe00b212acd3"
+
+  url "https://github.com/islam3zzat/k8s-navigator/releases/download/#{version}/k8s-navigator-0.0.41-universal.dmg"
+  name "K8s Navigator"
+  desc "Tool for navigating Kubernetes clusters"
   homepage "https://github.com/islam3zzat/k8s-navigator"
-  url "https://storage.googleapis.com/k8s-navigator-bucket/k8s-navigator-darwin-universal-0.0.399.zip"
-  sha256 "6dbe78bfb1961b25bceb034a60d7b46cafbabe4d5198155c32d78e53346f79c2"
-  license "MIT"
 
-  depends_on "node"
+  depends_on formula: "node"
 
-  def install
-    system "unzip", cached_download, "-d", "extracted"
-    # Copy the .app bundle to the Applications directory using rsync
-    prefix.install "extracted/k8s-navigator.app"
-  end
+  app "k8s-navigator.app"
 
-  def caveats
-    <<~EOS
-    k8s-navigator.app has been installed to:
-    #{opt_prefix}/k8s-navigator.app
+  caveats <<~EOS
+    To add k8s-navigator to your PATH, you can use the following command:
+      echo 'export PATH="/Applications/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.zshrc
 
-  To launch k8s-navigator, you can use the following command:
-    open #{opt_prefix}/k8s-navigator.app
+    or for bash users:
+      echo 'export PATH="/Applications/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.bashrc
 
-  Note: Moving the app to the Applications folder requires administrator privileges.
-  If you want to move k8s-navigator to your Applications folder, use the following command:
-    sudo cp -r #{opt_prefix}/k8s-navigator.app /Applications
+    You will need to restart your terminal for the changes to take effect.
+  EOS
 
-
-  To add k8s-navigator to your PATH, you can use the command:
-    echo 'export PATH="/Applications/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.zshrc
-EOS
-  end
+  zap trash: [
+    "~/Library/Application Support/k8s-navigator",
+    "~/Library/Preferences/com.example.k8s-navigator.plist",
+    "~/Library/Saved Application State/com.example.k8s-navigator.savedState",
+  ]
 
   test do
-    system "#{bin}/k8s-navigator", "--version"
+    system "/Applications/k8s-navigator.app/Contents/MacOS/k8s-navigator", "--version"
   end
 end

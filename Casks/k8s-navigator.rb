@@ -10,5 +10,4 @@ cask "k8s-navigator" do
   depends_on formula: "node"
 
   app "k8s-navigator.app"
-
 end

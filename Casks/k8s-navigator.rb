@@ -11,12 +11,6 @@ cask "k8s-navigator" do
 
   app "k8s-navigator.app"
 
-  zap trash: [
-    "~/Library/Application Support/k8s-navigator",
-    "~/Library/Preferences/com.example.k8s-navigator.plist",
-    "~/Library/Saved Application State/com.example.k8s-navigator.savedState",
-  ]
-
   caveats do
     <<~EOS
       To add k8s-navigator to your PATH, you can use the following command:

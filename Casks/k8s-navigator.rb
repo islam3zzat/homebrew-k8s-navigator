@@ -17,15 +17,17 @@ cask "k8s-navigator" do
     "~/Library/Saved Application State/com.example.k8s-navigator.savedState",
   ]
 
-  caveats <<~EOS
-    To add k8s-navigator to your PATH, you can use the following command:
-      echo 'export PATH="/Applications/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.zshrc
+  caveats do
+    <<~EOS
+      To add k8s-navigator to your PATH, you can use the following command:
+        echo 'export PATH="/Applications/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.zshrc
 
-    or for bash users:
-      echo 'export PATH="/Applications/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.bashrc
+      or for bash users:
+        echo 'export PATH="/Applications/k8s-navigator.app/Contents/MacOS:$PATH"' >> ~/.bashrc
 
-    You will need to restart your terminal for the changes to take effect.
-  EOS
+      You will need to restart your terminal for the changes to take effect.
+    EOS
+  end
 
   test do
     system "/Applications/k8s-navigator.app/Contents/MacOS/k8s-navigator", "--version"
